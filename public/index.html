@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Voice Recording Submission</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top-header">
+    <!-- <div class="logo">
+      <img src="logo.png" alt="Logo">
+    </div> -->
+    <h1 class="main-heading">Nepali Voice Dataset</h1>
+    <nav>
+    <a href="#" class="nav-link">Homepage</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Submit Your Voice Recording</h2>
+  <p class="description">
+    We are collecting a diverse voice samples from across Nepal's provinces as part of 
+    a research and development project focused on regional speech patterns.
+    Help us build a diverse voice dataset by recording your voice. Please read the sentence below and provide your details.
+  </p>
+  
+  <form id="voiceform">
+  <label for="province">Province:</label>
+  <select id="province">
+    <option value="" disabled selected>-- Select your province --</option>
+    <option value="Koshi">Province 1</option>
+    <option value="Madhesh">Province 2</option>
+    <option value="Bagmati">Bagmati Province</option>
+    <option value="Gandaki">Gandaki Province</option>
+    <option value="Lumbini">Lumbini Province</option>
+    <option value="Karnali">Karnali Province</option>
+    <option value="Sudurpashchim">Sudurpashchim Province</option>
+  </select>
+  
+  <label>District:</label>
+  <select id="district" required>
+    <option value="">-- Select District --</option>
+  </select>
+
+  <label for="age">Age:</label>
+  <input type="number" id="age" placeholder="Enter your age">
+
+  <label for="sentence">Please read this sentence aloud:</label>
+  <div class="sentence-box">
+    <!-- नेपाल एक सुन्दर देश हो जहाँ विभिन्न भाषा, संस्कृति र परम्परा पाइन्छ। -->
+    "नेपाल एक हिमाली, पहाडी र तराई भू-भागले भरिएको सुन्दर देश हो। यहाँ धेरै जातजाति, भाषा, र संस्कृतिहरू छन्। प्रत्येक क्षेत्रको खानपान, पोशाक र बोलचालमा फरकपन पाइन्छ।"
+  </div>
+
+  <button id="recordButton" class="record-button" type="button">🎙️ Start Recording</button>
+  <audio id="audioPlayback" controls style="display: none;"></audio>
+  <button id="submitButton" class="submit-button" disabled>Submit Recording</button>
+</form>
+</div>
+    
+<section class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-container">
+    <div class="faq-item">
+      <h3>What is the purpose of this project?</h3>
+      <p>This project aims to study how speech patterns vary across different regions and how voices may reflect geographic origins. 
+        Your contribution helps in building a speech-based research dataset.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How will my voice be used?</h3>
+      <p>Your voice recording will be used for research and educational purposes to train an AI voice model by analyzing regional speech characteristics. All data will be anonymized and securely stored.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How do I get started?</h3>
+      <p>Simply select your actual hometown region, enter your age, and record yourself reading the above short sentence. Then, submit your recordings securely through our platform.</p>
+    </div>
+  </div>
+</section>
+<footer class="footer">
+  <p>&copy; 2025 Nepali Voice Dataset. All rights reserved.</p>
+</footer>  
+
+<script src="recorder.js"></script>
+</body>
+</html>
