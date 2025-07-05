@@ -93,17 +93,23 @@ input {
 
 .record-button {
   background-color: #e5bcbc;
-  color: #333;
+  color: #000000;
 }
 
 .submit-button {
   background-color: #f0cfcf;
-  color: #999;
+  color: #000000;
 }
 
 .submit-button.enabled {
-  background-color: #d97d7d;
+  background-color:  #4CAF50; /* Green */
   color: white;
+}
+
+.recording {
+  background-color: #e74c3c; /* red */
+  color: white;
+  border: none;
 }
 
 select {

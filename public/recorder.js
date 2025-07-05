@@ -34,6 +34,7 @@ startBtn.addEventListener("click", async () => {
 
       mediaRecorder.start();
       startBtn.textContent = "⏹️ Stop Recording";
+      startBtn.classList.add("recording");
       isRecording = true;
     } catch (err) {
       alert("Microphone permission denied or unavailable.");
@@ -41,6 +42,7 @@ startBtn.addEventListener("click", async () => {
   } else {
     mediaRecorder.stop();
     startBtn.textContent = "🎙️ Start Recording";
+    startBtn.classList.remove("recording");
     isRecording = false;
   }
 });
