@@ -5,6 +5,14 @@ let audioChunks = [];
 const startBtn = document.getElementById("recordButton");
 const uploadBtn = document.getElementById("submitButton");
 const form = document.getElementById("voiceform");
+const popSubmit = document.getElementById("popupSubmit");
+
+function closePopup() {
+  document.getElementById("popupNotice").style.display = "none";
+}
+function closePopupS() {
+  document.getElementById("popupSubmit").style.display = "none";
+}
 
 startBtn.addEventListener("click", async () => {
   if (!isRecording) {
@@ -73,7 +81,9 @@ uploadBtn.addEventListener("click", async (e) => {
   });
 
   if (response.ok) {
-    alert("Thank you! Your voice has been uploaded.");
+    // alert("Thank you! Your voice has been uploaded.");
+    popSubmit.style.display = "flex";
+
     form.reset();
     const audioPlayback = document.getElementById("audioPlayback");
     audioPlayback.src = "";

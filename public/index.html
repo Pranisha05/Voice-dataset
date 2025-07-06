@@ -12,6 +12,14 @@
 </header>
 
 <div class="container">
+  <div id="popupNotice" class="popup-overlay">
+  <div class="popup-content">
+    <h2>📢 Notice</h2>
+    <p>To ensure accurate data collection, please select your actual hometown or place of origin. Your correct location helps us build better region-specific AI models for Nepali speech.</p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+  </div>
+
   <h2>Submit Your Voice Recording</h2>
   <p class="description">
     We are collecting a diverse voice samples across the provinces of Nepal as part of 
@@ -49,7 +57,14 @@
   <button id="recordButton" class="record-button" type="button">🎙️ Start Recording</button>
   <audio id="audioPlayback" controls style="display: none;"></audio>
   <button id="submitButton" class="submit-button" disabled>Submit Recording</button>
-</form>
+  </form>
+  <div id="popupSubmit" class="popup-overlay2" >
+    <div class="popup-content2">
+      <h2>✅ Submission Successful</h2>
+      <p>"Thank you! We have successfully received your voice sample. Your contribution will greatly support our research."</p>
+      <button onclick="closePopupS()">Close</button>
+    </div>
+    </div>
 </div>
     
 <section class="faq-section">
@@ -70,6 +85,7 @@
     </div>
   </div>
 </section>
+
 <footer class="footer">
   <p>&copy; 2025 Nepali Voice Dataset. All rights reserved.</p>
 </footer>  
