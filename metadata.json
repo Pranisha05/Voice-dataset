@@ -1,29 +1,3 @@
 [
-  {
-    "count": 1,
-    "filename": "1751812934621-778061.wav",
-    "age": "23",
-    "gender": "Female",
-    "province": "Koshi",
-    "district": "Khotang",
-    "timestamp": "2025-07-06T14:42:14.633Z"
-  },
-  {
-    "count": 2,
-    "filename": "1751812990036-901534.wav",
-    "age": "22",
-    "gender": "Male",
-    "province": "Lumbini",
-    "district": "Bardiya",
-    "timestamp": "2025-07-06T14:43:10.041Z"
-  },
-  {
-    "count": 3,
-    "filename": "1751813020077-44446.wav",
-    "age": "25",
-    "gender": "Other",
-    "province": "Gandaki",
-    "district": "Manang",
-    "timestamp": "2025-07-06T14:43:40.077Z"
-  }
+  
 ]
