@@ -10,16 +10,16 @@ Programming Language: JavaScript
 Package Manager: Npm
 
 Installation  
-Build Voice-dataset from the sounge and install dependencies:
+Build Voice-dataset from the source and install dependencies:
 
-1. Clone the repository:  
-   › git clone https://github.com/Pranisha05/Voice-dataset
-2. Navigate to the project directory:  
-   › cd Voice-dataset
+1. Clone the repository:
+   > git clone https://github.com/Pranisha05/Voice-dataset
+2. Navigate to the project directory:
+   > cd Voice-dataset
 3. Install the dependencies:  
-   Using npm:  
-   › npm install
-4. Run the server.js file  
-   › node server.js
-5. Navigate to the site:  
-   › ctrl+click link
+   Using npm:
+   > npm install
+4. Run the server.js file
+   > node server.js
+5. Navigate to the site:
+   > ctrl+click link
