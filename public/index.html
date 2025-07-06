@@ -14,9 +14,9 @@
 <div class="container">
   <div id="popupNotice" class="popup-overlay">
   <div class="popup-content">
-    <h2>📢 Notice</h2>
+    <h2>📋 Important Guidelines </h2>
     <p>To ensure accurate data collection, please select your actual hometown or place of origin. Your correct location helps us build better region-specific AI models for Nepali speech.</p>
-    <button onclick="closePopup()">Close</button>
+    <button onclick="closePopup()">OK</button>
   </div>
   </div>
 
@@ -48,7 +48,15 @@
   <label for="age">Age:</label>
   <input type="number" id="age" placeholder="Enter your age">
 
-  <label for="sentence">Please read this sentence aloud:</label>
+  <label for="gender" >Gender:</label>
+  <select id="gender">
+    <option value="" disabled selected>-- Select Gender --</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <label for="sentence" class="sentence">Read the sentence below clearly and at a natural pace for accurate recording:</label>
   <div class="sentence-box">
     <!-- नेपाल एक सुन्दर देश हो जहाँ विभिन्न भाषा, संस्कृति र परम्परा पाइन्छ। -->
     "नेपाल एक हिमाली, पहाडी र तराई भू-भागले भरिएको सुन्दर देश हो। यहाँ धेरै जातजाति, भाषा, र संस्कृतिहरू छन्। प्रत्येक क्षेत्रको खानपान, पोशाक र बोलचालमा फरकपन पाइन्छ।"
@@ -62,7 +70,7 @@
     <div class="popup-content2">
       <h2>✅ Submission Successful</h2>
       <p>"Thank you! We have successfully received your voice sample. Your contribution will greatly support our research."</p>
-      <button onclick="closePopupS()">Close</button>
+      <button onclick="closePopupS()">OK</button>
     </div>
     </div>
 </div>

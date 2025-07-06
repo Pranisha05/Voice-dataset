@@ -11,9 +11,9 @@ app.use(express.json());
 const upload = multer({ storage: multer.memoryStorage() }); // ← store in memory first
 
 app.post("/upload", upload.single("audio"), (req, res) => {
-  const { age, province, district } = req.body;
+  const { age, province, district, gender } = req.body;
 
-  if (!req.file || !age || !province || !district) {
+  if (!req.file || !age || !province || !district || !gender) {
     return res.status(400).send("Missing fields");
   }
 
@@ -47,6 +47,7 @@ app.post("/upload", upload.single("audio"), (req, res) => {
     count: newCount,
     filename,
     age,
+    gender,
     province,
     district,
     timestamp: new Date().toISOString(),

@@ -35,7 +35,6 @@ startBtn.addEventListener("click", async () => {
         const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
         const audioURL = URL.createObjectURL(audioBlob);
 
-        //const audioPlayback = document.getElementById("audioPlayback");
         audioPlayback.src = audioURL;
         audioPlayback.style.display = "block";
 
@@ -66,11 +65,13 @@ uploadBtn.addEventListener("click", async (e) => {
   const provinces = document.getElementById("province").value;
   const age = document.getElementById("age").value;
   const district = document.getElementById("district").value;
+  const gender = document.getElementById("gender").value;
 
   const fields = [
     { id: "province", value: provinces },
     { id: "district", value: district },
     { id: "age", value: age },
+    { id: "gender", value: gender },
   ];
 
   fields.forEach((field) => {
@@ -83,6 +84,7 @@ uploadBtn.addEventListener("click", async (e) => {
   formData.append("province", document.getElementById("province").value);
   formData.append("district", document.getElementById("district").value);
   formData.append("age", document.getElementById("age").value);
+  formData.append("gender", document.getElementById("gender").value);
 
   const response = await fetch("/upload", {
     method: "POST",
@@ -98,8 +100,8 @@ uploadBtn.addEventListener("click", async (e) => {
     document.getElementById("province").style.borderColor = ""; // Reset border color
     document.getElementById("district").style.borderColor = "";
     document.getElementById("age").style.borderColor = "";
+    document.getElementById("gender").style.borderColor = "";
 
-    //const audioPlayback = document.getElementById("audioPlayback"); // Reset audio playback
     audioPlayback.src = "";
     audioPlayback.style.display = "none";
 

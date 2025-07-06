@@ -73,8 +73,12 @@ input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  margin-bottom: 15px;
   font-size: 14px;
+}
+
+.sentence{
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .sentence-box {
@@ -123,7 +127,6 @@ select {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  /* margin-bottom: 5px; */
   font-size: 14px;
   background-color: white;
 }
@@ -219,6 +222,9 @@ audio {
   cursor: pointer;
 }
 
+.popup-content h2 {
+  margin-bottom: 15px;
+}
 
 .popup-overlay2 {
   position: fixed;
@@ -240,6 +246,10 @@ audio {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   text-align: center;
   max-width: 400px;
+}
+
+.popup-content2 h2 {
+  margin-bottom: 15px;
 }
 .popup-content2 button {
   margin-top: 20px;
