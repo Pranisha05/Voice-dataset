@@ -36,8 +36,8 @@ startBtn.addEventListener("click", async () => {
         audioPlayback.src = audioURL;
         audioPlayback.style.display = "block";
 
-        submitButton.disabled = false;
-        submitButton.classList.add("enabled");
+        uploadBtn.disabled = false;
+        uploadBtn.classList.add("enabled");
       };
 
       mediaRecorder.start();
@@ -64,10 +64,16 @@ uploadBtn.addEventListener("click", async (e) => {
   const age = document.getElementById("age").value;
   const district = document.getElementById("district").value;
 
-  if (!provinces || !age || !district) {
-    alert("Please enter all the fields.");
-    return;
-  }
+  const fields = [
+    { id: "province", value: provinces },
+    { id: "district", value: district },
+    { id: "age", value: age },
+  ];
+
+  fields.forEach((field) => {
+    const element = document.getElementById(field.id);
+    element.style.borderColor = field.value ? "" : "red"; // Set border color to red if empty
+  });
 
   const formData = new FormData();
   formData.append("audio", audioBlob, "voice.wav");
@@ -81,18 +87,20 @@ uploadBtn.addEventListener("click", async (e) => {
   });
 
   if (response.ok) {
-    // alert("Thank you! Your voice has been uploaded.");
     popSubmit.style.display = "flex";
 
     form.reset();
-    const audioPlayback = document.getElementById("audioPlayback");
+
+    document.getElementById("province").style.borderColor = ""; // Reset border color
+    document.getElementById("district").style.borderColor = "";
+    document.getElementById("age").style.borderColor = "";
+
+    const audioPlayback = document.getElementById("audioPlayback"); // Reset audio playback
     audioPlayback.src = "";
     audioPlayback.style.display = "none";
 
-    uploadBtn.disabled = true;
+    uploadBtn.disabled = true; // Disable submit button
     uploadBtn.classList.remove("enabled");
-  } else {
-    alert("Upload failed.");
   }
 });
 

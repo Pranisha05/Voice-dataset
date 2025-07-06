@@ -98,13 +98,13 @@ input {
 }
 
 .record-button {
-  background-color: #e5bcbc;
+  background-color: #d89c9c;
   color: #000000;
 }
 
 .submit-button {
   background-color: #f0cfcf;
-  color: #000000;
+  color: #727272;
 }
 
 .submit-button.enabled {
