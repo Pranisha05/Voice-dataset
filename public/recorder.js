@@ -49,7 +49,7 @@ startBtn.addEventListener("click", async () => {
     }
   } else {
     mediaRecorder.stop();
-    startBtn.textContent = "🎙️ Start Recording";
+    startBtn.textContent = "🎙️ Restart Recording";
     startBtn.classList.remove("recording");
     isRecording = false;
   }
@@ -90,6 +90,7 @@ uploadBtn.addEventListener("click", async (e) => {
     popSubmit.style.display = "flex";
 
     form.reset();
+    startBtn.textContent = "🎙️ Start Recording";
 
     document.getElementById("province").style.borderColor = ""; // Reset border color
     document.getElementById("district").style.borderColor = "";
