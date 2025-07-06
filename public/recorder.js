@@ -5,7 +5,7 @@ let audioChunks = [];
 const startBtn = document.getElementById("recordButton");
 const uploadBtn = document.getElementById("submitButton");
 const form = document.getElementById("voiceform");
-const popSubmit = document.getElementById("popupSubmit");
+const audioPlayback = document.getElementById("audioPlayback");
 
 function closePopup() {
   document.getElementById("popupNotice").style.display = "none";
@@ -22,6 +22,9 @@ startBtn.addEventListener("click", async () => {
 
       audioChunks = [];
 
+      audioPlayback.src = "";
+      audioPlayback.style.display = "none";
+
       mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
           audioChunks.push(event.data);
@@ -32,7 +35,7 @@ startBtn.addEventListener("click", async () => {
         const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
         const audioURL = URL.createObjectURL(audioBlob);
 
-        const audioPlayback = document.getElementById("audioPlayback");
+        //const audioPlayback = document.getElementById("audioPlayback");
         audioPlayback.src = audioURL;
         audioPlayback.style.display = "block";
 
@@ -87,7 +90,7 @@ uploadBtn.addEventListener("click", async (e) => {
   });
 
   if (response.ok) {
-    popSubmit.style.display = "flex";
+    document.getElementById("popupSubmit").style.display = "flex";
 
     form.reset();
     startBtn.textContent = "🎙️ Start Recording";
@@ -96,7 +99,7 @@ uploadBtn.addEventListener("click", async (e) => {
     document.getElementById("district").style.borderColor = "";
     document.getElementById("age").style.borderColor = "";
 
-    const audioPlayback = document.getElementById("audioPlayback"); // Reset audio playback
+    //const audioPlayback = document.getElementById("audioPlayback"); // Reset audio playback
     audioPlayback.src = "";
     audioPlayback.style.display = "none";
 
