@@ -12,7 +12,18 @@
 </header>
 
 <div class="container">
-  <div id="popupNotice" class="popup-overlay">
+  <!-- Consent Popup (Shown first) -->
+<div id="popupConsent" class="popup-overlay">
+  <div class="popup-consent">
+    <h2>🔊 Voice Consent Required</h2>
+    <p>Please record the following sentence to give your consent:</p>
+    <h4>“I voluntarily give my consent to participate in this voice dataset project.”</h4>
+    <button id="startConsentBtn" class="consent-record" type="button">🎙️ Start Consent Recording</button>
+    <audio id="consentAudio" controls style="display: none;"></audio>
+    <button id="consentContinueBtn" class="continue-button" disabled>Continue</button>
+  </div>
+</div>
+  <div id="popupNotice" class="popup-overlay" style="display: none;">
   <div class="popup-content">
     <h2>📋 Important Guidelines </h2>
     <p>
@@ -23,8 +34,8 @@
       2. Speak clearly and naturally when recording the given sentence.<br>
       <h4>(Practice the sentence once before recording)</h4>
       3. Use a quiet environment and make sure your microphone is working properly.<br>
-      4. Do not add extra words or commentary — say only the sentence shown.<br>
-      5. Only submit once. Multiple submissions from the same person will not be accepted.<br><br>
+      4. Do not speak random words or make irrelevant sounds, as it may affect the quality of the dataset.<br>
+      5. Kindly submit once only. Multiple submissions from the same person will not be accepted.<br><br>
       🎬 Recording Process:<br>
       Enter Details ➝ Start Recording ➝ Speak Sentence ➝ Stop Recording ➝ Submit Recording<br>
       (To redo: Stop Recording ➝ Restart Recording ➝ Stop Recording ➝ Submit Recording)<br><br>
@@ -80,8 +91,9 @@
   </form>
   <div id="popupSubmit" class="popup-overlay2" >
     <div class="popup-content2">
-      <h2>✅ Submission Successful</h2>
-      <p>"Thank you! We have successfully received your voice sample. Your contribution will greatly support our research."</p>
+      <h2>✅ Submission Successful!!</h2>
+      <p>"Thank you for your valuable contribution! We have successfully received your voice sample."<br>
+        <h4> Your Voice Matters!</h4> </p>
       <button onclick="closePopupS()">OK</button>
     </div>
     </div>

@@ -56,7 +56,7 @@ h2 {
 }
 
 .description {
-  text-align: center;
+  text-align: justify;
   margin-bottom: 20px;
   margin-top: 20px;
   color: #555;
@@ -76,6 +76,11 @@ input {
   font-size: 14px;
 }
 
+select {
+  color: #333; /* consistent dark color */
+  appearance: none;
+}
+
 .sentence{
   margin-top: 20px;
   margin-bottom: 10px;
@@ -88,6 +93,7 @@ input {
   font-size: 16px;
   color: #333;
   margin-bottom: 20px;
+  text-align: justify;
 }
 
 .record-button,
@@ -138,6 +144,7 @@ audio {
   border-radius: 25px;
   margin-bottom: 10px;
   display: none; /* Initially hidden */
+  appearance: none;
 }
 
 
@@ -190,6 +197,7 @@ audio {
   line-height: 1.6;
 }
 
+/* Popup Styles */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -203,35 +211,78 @@ audio {
   z-index: 9999;
 }
 
+/* Popup Content */
 .popup-content {
   background-color: #fff;
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  text-align: left;
+  text-align: justify;
   max-width: 600px;
 }
-
 .popup-content button {
   margin: 20px auto 0;
   padding: 10px 20px;
-  background-color: #28a745; /* green */
+  background-color: #4CAF50; 
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
   display: block;
 }
-
 .popup-content h2 {
   margin-bottom: 15px;
 }
-.popup-content h4 {
+
+/* Consent Popup */
+.popup-consent {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  text-align: justify;
+  max-width: 500px;
+}
+.popup-consent button {
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  display: block;
+}
+.popup-consent h4 {
   font-style: italic;
-  font-weight: normal;
-  margin-left: 10px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+.popup-consent p {
+  margin-top: 10px;
+}
+.popup-consent audio {
+  width: 100%;
+  margin-top: 10px;
+  display: none; /* Initially hidden */ 
+  appearance: none;
+}
+.consent-record {
+  background-color: #d89c9c;
+  color: #000000;
+}
+.continue-button {
+  background-color: #83c186; 
+  color: white;
+}
+.continue-button.enabled {
+  background-color: #4CAF50; 
+  color: white;
+}
+.recordings {
+  background-color: #e74c3c; /* red */
+  color: white;
 }
 
+/* Popup for Submission Confirmation */
 .popup-overlay2 {
   position: fixed;
   top: 0;
@@ -244,7 +295,6 @@ audio {
   align-items: center;
   z-index: 9999;
 }
-
 .popup-content2 {
   background-color: #fff;
   padding: 25px;
@@ -253,16 +303,15 @@ audio {
   text-align: center;
   max-width: 400px;
 }
-
 .popup-content2 h2 {
   margin-bottom: 15px;
 }
 .popup-content2 button {
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #28a745; /* green */
+  background-color: #4CAF50; /* green */
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
 }
