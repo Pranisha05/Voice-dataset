@@ -15,7 +15,20 @@
   <div id="popupNotice" class="popup-overlay">
   <div class="popup-content">
     <h2>📋 Important Guidelines </h2>
-    <p>To ensure accurate data collection, please select your actual hometown or place of origin. Your correct location helps us build better region-specific AI models for Nepali speech.</p>
+    <p>
+      We are collecting voice recordings for research on identifying a speaker’s 
+      geographic origin from speech. Please read the instructions carefully before proceeding.<br><br>
+      📌 Instructions:<br>
+      1. Select your actual hometown or place of birth. Please be honest — this is crucial for the accuracy of our research.<br>
+      2. Speak clearly and naturally when recording the given sentence.<br>
+      <h4>(Practice the sentence once before recording)</h4>
+      3. Use a quiet environment and make sure your microphone is working properly.<br>
+      4. Do not add extra words or commentary — say only the sentence shown.<br>
+      5. Only submit once. Multiple submissions from the same person will not be accepted.<br><br>
+      🎬 Recording Process:<br>
+      Enter Details ➝ Start Recording ➝ Speak Sentence ➝ Stop Recording ➝ Submit Recording<br>
+      (To redo: Stop Recording ➝ Restart Recording ➝ Stop Recording ➝ Submit Recording)<br><br>
+      <h4>(Your data will be stored securely and used only for academic research purposes.)</h4></p>
     <button onclick="closePopup()">OK</button>
   </div>
   </div>
@@ -58,8 +71,7 @@
 
   <label for="sentence" class="sentence">Read the sentence below clearly and at a natural pace for accurate recording:</label>
   <div class="sentence-box">
-    <!-- नेपाल एक सुन्दर देश हो जहाँ विभिन्न भाषा, संस्कृति र परम्परा पाइन्छ। -->
-    "नेपाल एक हिमाली, पहाडी र तराई भू-भागले भरिएको सुन्दर देश हो। यहाँ धेरै जातजाति, भाषा, र संस्कृतिहरू छन्। प्रत्येक क्षेत्रको खानपान, पोशाक र बोलचालमा फरकपन पाइन्छ।"
+    <p id="sentence">Loading...</p>
   </div>
 
   <button id="recordButton" class="record-button" type="button">🎙️ Start Recording</button>

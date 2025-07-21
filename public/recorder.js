@@ -13,6 +13,29 @@ function closePopup() {
 function closePopupS() {
   document.getElementById("popupSubmit").style.display = "none";
 }
+let lastIndex = -1; // Initialize lastIndex to -1 to avoid repetition
+let sentences = []; // Initialize sentences to store sentences
+
+function setRandomSentence() {
+  let randomIndex;
+  do {
+    randomIndex = Math.floor(Math.random() * sentences.length);
+  } while (randomIndex === lastIndex);
+  lastIndex = randomIndex; // Store last index to avoid repetition
+  const randomSentence = sentences[randomIndex];
+  document.getElementById("sentence").textContent = randomSentence;
+}
+
+fetch("sentence.json")
+  .then((response) => response.json())
+  .then((data) => {
+    sentences = data;
+    setRandomSentence(); // Set a random sentence on page load
+  })
+  .catch((error) => {
+    console.log("Error loading sentences:", error);
+    document.getElementById("sentence").innerText = "Could not load sentence.";
+  });
 
 startBtn.addEventListener("click", async () => {
   if (!isRecording) {
@@ -24,6 +47,8 @@ startBtn.addEventListener("click", async () => {
 
       audioPlayback.src = "";
       audioPlayback.style.display = "none";
+      uploadBtn.disabled = true; // Disable submit button
+      uploadBtn.classList.remove("enabled");
 
       mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
@@ -32,10 +57,10 @@ startBtn.addEventListener("click", async () => {
       };
 
       mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
-        const audioURL = URL.createObjectURL(audioBlob);
+        const playbackBlob = new Blob(audioChunks, { type: "audio/mp4" });
+        const playbackURL = URL.createObjectURL(playbackBlob);
 
-        audioPlayback.src = audioURL;
+        audioPlayback.src = playbackURL;
         audioPlayback.style.display = "block";
 
         uploadBtn.disabled = false;
@@ -107,6 +132,8 @@ uploadBtn.addEventListener("click", async (e) => {
 
     uploadBtn.disabled = true; // Disable submit button
     uploadBtn.classList.remove("enabled");
+
+    setRandomSentence(); // Set a new random sentence
   }
 });
 
