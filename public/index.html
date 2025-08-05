@@ -12,8 +12,8 @@
 </header>
 
 <div class="container">
-  <!-- Consent Popup (Shown first) -->
-<div id="popupConsent" class="popup-overlay">
+  <!-- Consent Popup  -->
+<div id="popupConsent" class="popup-overlay" style="display: none">
   <div class="popup-consent">
     <h2>🔊 Voice Consent Required</h2>
     <p>We are collecting different voice samples from all over Nepal for a research project that studies how people speak in different regions.
@@ -28,7 +28,7 @@ Please help us by recording your voice to support this voice dataset. To collect
     <button id="consentContinueBtn" class="continue-button" disabled>Continue</button>
   </div>
 </div>
-  <div id="popupNotice" class="popup-overlay" style="display: none;">
+  <div id="popupNotice" class="popup-overlay">
   <div class="popup-content">
     <h2>📋 Important Guidelines </h2>
     <p>
@@ -99,7 +99,7 @@ Please help us by recording your voice to support this voice dataset. To collect
   <button id="uploadButton" class="upload-button" type="button" disabled>Upload Recording</button>
   <button id="submitButton" class="submit-button" disabled>Submit Recording</button>
   </form>
-  <div id="popupSubmit" class="popup-overlay2" >
+  <div id="popupSubmit" class="popup-overlay" style="display: none">
     <div class="popup-content2">
       <h2>✅ Submission Successful!!</h2>
       <p>"Thank you for your valuable contribution! We have successfully received your voice sample."<br>

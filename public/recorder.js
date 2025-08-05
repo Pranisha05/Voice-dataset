@@ -1,5 +1,6 @@
 function closePopup() {
   document.getElementById("popupNotice").style.display = "none";
+  document.getElementById("popupConsent").style.display = "flex"; // Show consent popup
 }
 function closePopupS() {
   document.getElementById("popupSubmit").style.display = "none";
@@ -49,12 +50,6 @@ Promise.all([
     console.error("Error loading sentences:", err);
     document.getElementById("sentence").innerText = "Could not load sentence.";
   });
-
-// After recording consent and clicking Continue
-document.getElementById("consentContinueBtn").addEventListener("click", () => {
-  document.getElementById("popupConsent").style.display = "none";
-  document.getElementById("popupNotice").style.display = "flex"; // Show instruction popup
-});
 
 let consentRecorder;
 let consentChunks = [];
@@ -127,13 +122,7 @@ startConsentBtn.addEventListener("click", async () => {
 // After consent, show instruction popup
 consentContinueBtn.addEventListener("click", () => {
   document.getElementById("popupConsent").style.display = "none";
-  document.getElementById("popupInstructions").style.display = "flex";
 });
-
-// Close final popup
-function closeInstructions() {
-  document.getElementById("popupInstructions").style.display = "none";
-}
 
 let isRecording = false;
 let mediaRecorder;
