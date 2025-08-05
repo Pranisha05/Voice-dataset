@@ -6,8 +6,10 @@ function closePopupS() {
   location.reload();
 }
 
-let lastIndex = -1; // Initialize lastIndex to -1 to avoid repetition
+let lastIndex = -1;
+let lastIndexp = -1; // Initialize lastIndex to -1 to avoid repetition
 let sentenceData = [];
+let paragraphData = []; // Array to store paragraph data
 
 function counter() {
   document.getElementById(
@@ -17,12 +19,12 @@ function counter() {
 function setRandomSentence() {
   counter();
   if (recordings.length == 0) {
-    let randomIndex;
+    let randomIndexp;
     do {
-      randomIndex = Math.floor(Math.random() * paragraphData.length);
-    } while (randomIndex === lastIndex);
-    lastIndex = randomIndex; // Store last index to avoid repetition
-    const randomParagraph = paragraphData[randomIndex];
+      randomIndexp = Math.floor(Math.random() * paragraphData.length);
+    } while (randomIndexp === lastIndexp);
+    lastIndexp = randomIndexp; // Store last index to avoid repetition
+    const randomParagraph = paragraphData[randomIndexp];
     document.getElementById("sentence").innerText = randomParagraph;
   } else {
     let randomIndex;
@@ -124,7 +126,6 @@ let isRecording = false;
 let mediaRecorder;
 let recordings = []; // Array to store recorded audio blobs
 let audioChunks = [];
-let index = 1; // Initialize index for sentence recording
 
 const startBtn = document.getElementById("recordButton");
 const uploadBtn = document.getElementById("uploadButton");
@@ -142,8 +143,8 @@ startBtn.addEventListener("click", async () => {
 
       audioPlayback.src = "";
       audioPlayback.style.display = "none";
-      submitBtn.disabled = true; // Disable submit button
-      submitBtn.classList.remove("enabled");
+      uploadBtn.disabled = true; // Disable upload button
+      uploadBtn.classList.remove("enabled");
 
       mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
@@ -160,9 +161,6 @@ startBtn.addEventListener("click", async () => {
 
         uploadBtn.disabled = false; // Enable upload button
         uploadBtn.classList.add("enabled");
-
-        // submitBtn.disabled = false;
-        // submitBtn.classList.add("enabled");
       };
 
       mediaRecorder.start();
@@ -275,10 +273,8 @@ submitBtn.addEventListener("click", async (e) => {
     submitBtn.disabled = true; // Disable submit button
     submitBtn.classList.remove("enabled");
     setRandomSentence(); // to change sentence
-
-    // setTimeout(() => {
-    //   location.reload();
-    // }, 2000);
+    startBtn.classList.remove("disabled");
+    startBtn.disabled = false; // Enable start button
   } else {
     console.log("Failed to upload audio. Please try again.");
   }
