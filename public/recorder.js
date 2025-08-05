@@ -85,11 +85,24 @@ startConsentBtn.addEventListener("click", async () => {
         }
       };
 
-      consentRecorder.onstop = () => {
-        const consentBlob = new Blob(consentChunks, { type: "audio/mp4" });
-        const consentURL = URL.createObjectURL(consentBlob);
+      consentRecorder.onstop = async () => {
+        const consentBlob = new Blob(consentChunks, {
+          type: consentRecorder.mimeType,
+        });
 
-        consentAudio.src = consentURL;
+        // Decode the recorded audio
+        const arrayBuffer = await consentBlob.arrayBuffer();
+        const audioContext = new (window.AudioContext ||
+          window.webkitAudioContext)();
+        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+
+        // Convert to WAV using audiobuffer-to-wav
+        const wavData = window.audioBufferToWav(audioBuffer);
+        const wavBlob = new Blob([wavData], { type: "audio/wav" });
+
+        // Play the WAV file
+        const wavUrl = URL.createObjectURL(wavBlob);
+        consentAudio.src = wavUrl;
         consentAudio.style.display = "block";
 
         consentContinueBtn.disabled = false;
@@ -152,11 +165,24 @@ startBtn.addEventListener("click", async () => {
         }
       };
 
-      mediaRecorder.onstop = () => {
-        const audiowebBlob = new Blob(audioChunks, { type: "audio/mp4" });
-        const audioURL = URL.createObjectURL(audiowebBlob);
+      mediaRecorder.onstop = async () => {
+        const audioBlob = new Blob(audioChunks, {
+          type: mediaRecorder.mimeType,
+        });
 
-        audioPlayback.src = audioURL;
+        // Decode the recorded audio
+        const arrayBuffer = await audioBlob.arrayBuffer();
+        const audioContext = new (window.AudioContext ||
+          window.webkitAudioContext)();
+        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+
+        // Convert to WAV using audiobuffer-to-wav
+        const wavData = window.audioBufferToWav(audioBuffer);
+        const wavBlob = new Blob([wavData], { type: "audio/wav" });
+
+        // Play the WAV file
+        const audioUrl = URL.createObjectURL(wavBlob);
+        audioPlayback.src = audioUrl;
         audioPlayback.style.display = "block";
 
         uploadBtn.disabled = false; // Enable upload button
@@ -178,9 +204,7 @@ startBtn.addEventListener("click", async () => {
   }
 });
 
-uploadBtn.addEventListener("click", () => {
-  // e.preventDefault(); // Stop form submission
-
+uploadBtn.addEventListener("click", async () => {
   uploadBtn.disabled = true;
   setTimeout(() => {
     sentence.classList.add("fade-out");
@@ -193,9 +217,18 @@ uploadBtn.addEventListener("click", () => {
   audioPlayback.src = ""; // Reset audio playback
   audioPlayback.style.display = "none"; // Hide audio playback
 
-  // Create a new Blob from the recorded audio chunks
-  const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
-  recordings.push(audioBlob);
+  const audioBlob = new Blob(audioChunks, { type: mediaRecorder.mimeType });
+
+  // Decode the recorded audio
+  const arrayBuffer = await audioBlob.arrayBuffer();
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+
+  // Convert to WAV using audiobuffer-to-wav
+  const wavData = window.audioBufferToWav(audioBuffer);
+  const wavBlob = new Blob([wavData], { type: "audio/wav" });
+
+  recordings.push(wavBlob);
   audioChunks = [];
   counter(); // Update the counter
   setRandomSentence(); // to change sentence
@@ -219,9 +252,6 @@ uploadBtn.addEventListener("click", () => {
 submitBtn.addEventListener("click", async (e) => {
   e.preventDefault();
 
-  //const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
-  const consentBlob = new Blob(consentChunks, { type: "audio/wav" });
-
   const provinces = document.getElementById("province").value;
   const age = document.getElementById("age").value;
   const district = document.getElementById("district").value;
@@ -244,7 +274,19 @@ submitBtn.addEventListener("click", async (e) => {
   recordings.forEach((blob, index) => {
     formData.append(`audio${index}`, blob, `sentence${index}.wav`);
   });
-  formData.append("consentAudio", consentBlob, "consent.wav");
+
+  const consentBlob = new Blob(consentChunks, { type: mediaRecorder.mimeType });
+
+  // Decode the recorded audio
+  const arrayBuffer = await consentBlob.arrayBuffer();
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+
+  // Convert to WAV using audiobuffer-to-wav
+  const wavData = window.audioBufferToWav(audioBuffer);
+  const wavBlob = new Blob([wavData], { type: "audio/wav" });
+  formData.append("consentAudio", wavBlob, "consent.wav");
+
   formData.append("province", document.getElementById("province").value);
   formData.append("district", document.getElementById("district").value);
   formData.append("age", document.getElementById("age").value);
