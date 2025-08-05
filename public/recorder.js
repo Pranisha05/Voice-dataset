@@ -3,28 +3,48 @@ function closePopup() {
 }
 function closePopupS() {
   document.getElementById("popupSubmit").style.display = "none";
+  location.reload();
 }
 
 let lastIndex = -1; // Initialize lastIndex to -1 to avoid repetition
 let sentenceData = [];
 
-function setRandomSentence() {
-  let randomIndex;
-  do {
-    randomIndex = Math.floor(Math.random() * sentenceData.length);
-  } while (randomIndex === lastIndex);
-  lastIndex = randomIndex; // Store last index to avoid repetition
-  const randomSentence = sentenceData[randomIndex];
-  document.getElementById("sentence").innerText = randomSentence;
+function counter() {
+  document.getElementById(
+    "counter"
+  ).innerText = `Audio recorded: ${recordings.length} of 11`;
 }
-fetch("sentence.json")
-  .then((response) => response.json())
-  .then((data) => {
-    sentenceData = data;
-    setRandomSentence();
+function setRandomSentence() {
+  counter();
+  if (recordings.length == 0) {
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * paragraphData.length);
+    } while (randomIndex === lastIndex);
+    lastIndex = randomIndex; // Store last index to avoid repetition
+    const randomParagraph = paragraphData[randomIndex];
+    document.getElementById("sentence").innerText = randomParagraph;
+  } else {
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * sentenceData.length);
+    } while (randomIndex === lastIndex);
+    lastIndex = randomIndex; // Store last index to avoid repetition
+    const randomSentence = sentenceData[randomIndex];
+    document.getElementById("sentence").innerText = randomSentence;
+  }
+}
+Promise.all([
+  fetch("paragraph.json").then((res) => res.json()),
+  fetch("sentence.json").then((res) => res.json()),
+])
+  .then(([paragraph, sentences]) => {
+    paragraphData = paragraph;
+    sentenceData = sentences;
+    setRandomSentence(); // Show first sentence (paragraph)
   })
-  .catch((error) => {
-    console.error("Error loading sentences:", error);
+  .catch((err) => {
+    console.error("Error loading sentences:", err);
     document.getElementById("sentence").innerText = "Could not load sentence.";
   });
 
@@ -102,10 +122,13 @@ function closeInstructions() {
 
 let isRecording = false;
 let mediaRecorder;
+let recordings = []; // Array to store recorded audio blobs
 let audioChunks = [];
+let index = 1; // Initialize index for sentence recording
 
 const startBtn = document.getElementById("recordButton");
-const uploadBtn = document.getElementById("submitButton");
+const uploadBtn = document.getElementById("uploadButton");
+const submitBtn = document.getElementById("submitButton");
 const form = document.getElementById("voiceform");
 const audioPlayback = document.getElementById("audioPlayback");
 
@@ -119,8 +142,9 @@ startBtn.addEventListener("click", async () => {
 
       audioPlayback.src = "";
       audioPlayback.style.display = "none";
-      uploadBtn.disabled = true; // Disable submit button
-      uploadBtn.classList.remove("enabled");
+      submitBtn.disabled = true; // Disable submit button
+      submitBtn.classList.remove("enabled");
+
       mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
           audioChunks.push(event.data);
@@ -128,14 +152,17 @@ startBtn.addEventListener("click", async () => {
       };
 
       mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(audioChunks, { type: "audio/mp4" });
-        const audioURL = URL.createObjectURL(audioBlob);
+        const audiowebBlob = new Blob(audioChunks, { type: "audio/mp4" });
+        const audioURL = URL.createObjectURL(audiowebBlob);
 
         audioPlayback.src = audioURL;
         audioPlayback.style.display = "block";
 
-        uploadBtn.disabled = false;
+        uploadBtn.disabled = false; // Enable upload button
         uploadBtn.classList.add("enabled");
+
+        // submitBtn.disabled = false;
+        // submitBtn.classList.add("enabled");
       };
 
       mediaRecorder.start();
@@ -153,10 +180,48 @@ startBtn.addEventListener("click", async () => {
   }
 });
 
-uploadBtn.addEventListener("click", async (e) => {
+uploadBtn.addEventListener("click", () => {
+  // e.preventDefault(); // Stop form submission
+
+  uploadBtn.disabled = true;
+  setTimeout(() => {
+    sentence.classList.add("fade-out");
+    setTimeout(() => {
+      sentence.classList.remove("fade-out");
+      sentence.classList.add("fade-in");
+    }, 300);
+  }, 500);
+
+  audioPlayback.src = ""; // Reset audio playback
+  audioPlayback.style.display = "none"; // Hide audio playback
+
+  // Create a new Blob from the recorded audio chunks
+  const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+  recordings.push(audioBlob);
+  audioChunks = [];
+  counter(); // Update the counter
+  setRandomSentence(); // to change sentence
+
+  if (recordings.length === 11) {
+    startBtn.classList.add("disabled");
+    startBtn.disabled = true; // Disable start button
+    uploadBtn.disabled = true; // disable upload button
+    uploadBtn.classList.remove("enabled");
+    uploadBtn.classList.add("disabled");
+    submitBtn.disabled = false; // Enable submit button
+    submitBtn.classList.add("enabled");
+  }
+
+  startBtn.textContent = "🎙️ Start Recording"; // Reset start button text
+  uploadBtn.disabled = true; // disable upload button
+  uploadBtn.classList.remove("enabled");
+  uploadBtn.classList.add("disabled");
+});
+
+submitBtn.addEventListener("click", async (e) => {
   e.preventDefault();
 
-  const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+  //const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
   const consentBlob = new Blob(consentChunks, { type: "audio/wav" });
 
   const provinces = document.getElementById("province").value;
@@ -178,7 +243,9 @@ uploadBtn.addEventListener("click", async (e) => {
   });
 
   const formData = new FormData();
-  formData.append("audio", audioBlob, "voice.wav");
+  recordings.forEach((blob, index) => {
+    formData.append(`audio${index}`, blob, `sentence${index}.wav`);
+  });
   formData.append("consentAudio", consentBlob, "consent.wav");
   formData.append("province", document.getElementById("province").value);
   formData.append("district", document.getElementById("district").value);
@@ -194,6 +261,7 @@ uploadBtn.addEventListener("click", async (e) => {
     document.getElementById("popupSubmit").style.display = "flex";
 
     form.reset();
+    recordings = []; // Reset recordings array
     startBtn.textContent = "🎙️ Start Recording";
 
     document.getElementById("province").style.borderColor = ""; // Reset border color
@@ -204,10 +272,13 @@ uploadBtn.addEventListener("click", async (e) => {
     audioPlayback.src = "";
     audioPlayback.style.display = "none";
 
-    uploadBtn.disabled = true; // Disable submit button
-    uploadBtn.classList.remove("enabled");
-
+    submitBtn.disabled = true; // Disable submit button
+    submitBtn.classList.remove("enabled");
     setRandomSentence(); // to change sentence
+
+    // setTimeout(() => {
+    //   location.reload();
+    // }, 2000);
   } else {
     console.log("Failed to upload audio. Please try again.");
   }

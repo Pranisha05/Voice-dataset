@@ -86,12 +86,17 @@ Please help us by recording your voice to support this voice dataset. To collect
   </select>
 
   <label for="sentence" class="sentence">Read the sentence below clearly and at a natural pace for accurate recording:</label>
-  <div class="sentence-box">
-    <p id="sentence">Loading...</p>
+  <div class ="counter-box">
+    <p id="counter">Loading...</p> 
   </div>
-
+  <div class="sentence-box">
+    <div class="sentence-text">
+     <p id="sentence">Loading...</p>
+  </div>
+  </div>
   <button id="recordButton" class="record-button" type="button">🎙️ Start Recording</button>
   <audio id="audioPlayback" controls style="display: none;"></audio>
+  <button id="uploadButton" class="upload-button" type="button" disabled>Upload Recording</button>
   <button id="submitButton" class="submit-button" disabled>Submit Recording</button>
   </form>
   <div id="popupSubmit" class="popup-overlay2" >
