@@ -38,7 +38,13 @@ app.post(
     fs.mkdirSync(folderPath, { recursive: true });
 
     //  Create consent folder uploads/consents if not exists
-    const consentfolderPath = path.join(__dirname, "uploads", "consents");
+    const consentfolderPath = path.join(
+      __dirname,
+      "uploads",
+      "consents",
+      province,
+      district
+    );
     fs.mkdirSync(consentfolderPath, { recursive: true });
 
     //  Create unique filename
