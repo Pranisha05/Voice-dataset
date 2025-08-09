@@ -82,7 +82,7 @@ select {
 }
 
 .sentence{
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 
@@ -95,6 +95,12 @@ select {
   margin-bottom: 20px;
   text-align: justify;
 }
+
+.counter-box{
+  margin-top: 5px;
+  margin-bottom: 8px;
+}
+
 
 .record-button,
 .submit-button ,.upload-button {
@@ -270,11 +276,11 @@ audio {
   appearance: none;
 }
 .consent-record {
-  background-color: #d89c9c;
+  background-color:#d89c9c;
   color: #000000;
 }
 .continue-button {
-  background-color: #83c186; 
+  background-color: #89c88c; 
   color: white;
 }
 .continue-button.enabled {
@@ -307,13 +313,48 @@ audio {
   border-radius: 12px;
   cursor: pointer;
 }
-   .sentence-text {
-      transition: opacity 0.5s ease-in-out;
-      opacity: 1;
-    }
-    .fade-out {
-      opacity: 0;
-    }
-    .fade-in {
-      opacity: 1;
-    }
+
+/* Fade-in and Fade-out Effects */
+.sentence-text {
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+}
+.fade-out {
+  opacity: 0;
+}
+.fade-in {
+  opacity: 1;
+}
+
+/* Choice (Yes/No) Container */
+.choice-container {
+  display: flex;
+  justify-content: flex-start;  /* one left, one right */
+  gap: 150px; /* space between the two choices */
+  max-width: 100%;                /* adjust as needed */
+}
+.choice-container label {
+  display: inline-flex;
+  gap: 10px; /* space between checkbox and text */
+}
+
+/* Map and Coordinates Section */
+#map {
+  height: 300px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.coords{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+button:not(:disabled):hover {
+  filter: brightness(90%);
+}

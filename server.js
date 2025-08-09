@@ -37,7 +37,7 @@ app.post(
 
     const consent = req.files.consentAudio[0];
     const paragraph = recording[0];
-    const { age, province, district, gender } = req.body;
+    const { age, province, district, gender, latitude, longitude } = req.body;
 
     if (
       !req.files ||
@@ -45,7 +45,9 @@ app.post(
       !age ||
       !province ||
       !district ||
-      !gender
+      !gender ||
+      !latitude ||
+      !longitude
     ) {
       return res.status(400).send("Missing fields");
     }
@@ -75,6 +77,7 @@ app.post(
 
     const fileindex = Date.now() + "-" + Math.floor(Math.random() * 1e6);
     let metadataEntry = {};
+
     //  Create unique filename for paragraph
     const paragraphfilename = fileindex + "-paragraph" + ".wav";
     const paragraphfilePath = path.join(paragraphfolderPath, paragraphfilename);
@@ -117,6 +120,8 @@ app.post(
       gender,
       province,
       district,
+      latitude,
+      longitude,
       timestamp: new Date().toISOString(),
     };
 

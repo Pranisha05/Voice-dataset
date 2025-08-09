@@ -13,40 +13,43 @@
 
 <div class="container">
   <!-- Consent Popup  -->
-<div id="popupConsent" class="popup-overlay" style="display: none">
-  <div class="popup-consent">
-    <h2>🔊 Voice Consent Required</h2>
-    <p>We are collecting different voice samples from all over Nepal for a research project that studies how people speak in different regions.
-Please help us by recording your voice to support this voice dataset. To collect your voice sample for our speech dataset, we need your recorded consent. 
-<!-- हामी नेपालका विभिन्न प्रदेशहरूबाट विविध आवाज नमूनाहरू सङ्कलन गर्दैछौं,
-जुन क्षेत्रीय बोलीबानीका ढाँचामा केन्द्रित अनुसन्धान तथा विकास परियोजनाको हिस्सा हो।
-कृपया आफ्नो आवाज रेकर्ड गरेर यो विविध आवाज डेटासेट निर्माण गर्न हामीलाई सहयोग गर्नुहोस्। <br><br>कृपया सहभागिता पुष्टि गर्न तलको वाक्य ठूलो आवाजमा पढ्नुहोस्।  -->
-<br><br>Please read the sentence below aloud to confirm your participation.</p>
-    <h4>“म मेरो आवाज यो अनुसन्धानको लागि प्रयोग गर्न अनुमति दिन्छु।”</h4>
-    <button id="startConsentBtn" class="consent-record" type="button">🎙️ Start Consent Recording</button>
-    <audio id="consentAudio" controls style="display: none;"></audio>
-    <button id="consentContinueBtn" class="continue-button" disabled>Continue</button>
+  <div id="popupConsent" class="popup-overlay" style="display: none">
+    <div class="popup-consent">
+      <h2>🔊 Voice Consent Required</h2>
+      <p>We are collecting different voice samples from all over Nepal for a research project that studies how people speak in different regions.
+        Please help us by recording your voice to support this voice dataset. To collect your voice sample for our speech dataset, we need your recorded consent. 
+      <!-- हामी नेपालका विभिन्न प्रदेशहरूबाट विविध आवाज नमूनाहरू सङ्कलन गर्दैछौं,
+      जुन क्षेत्रीय बोलीबानीका ढाँचामा केन्द्रित अनुसन्धान तथा विकास परियोजनाको हिस्सा हो।
+      कृपया आफ्नो आवाज रेकर्ड गरेर यो विविध आवाज डेटासेट निर्माण गर्न हामीलाई सहयोग गर्नुहोस्। 
+      <br><br>कृपया सहभागिता पुष्टि गर्न तलको वाक्य ठूलो आवाजमा पढ्नुहोस्।  -->
+      <br><br>Please read the sentence below aloud to confirm your participation.</p>
+      <h4>“म मेरो आवाज यो अनुसन्धानको लागि प्रयोग गर्न अनुमति दिन्छु।”</h4>
+      <button id="startConsentBtn" class="consent-record" type="button">🎙️ Start Consent Recording</button>
+      <audio id="consentAudio" controls style="display: none;"></audio>
+      <button id="consentContinueBtn" class="continue-button" disabled>Continue</button>
+    </div>
   </div>
-</div>
+
+  <!-- Popup Notice -->
   <div id="popupNotice" class="popup-overlay">
-  <div class="popup-content">
-    <h2>📋 Important Guidelines </h2>
-    <p>
-      We are collecting voice recordings for research on identifying a speaker’s 
-      geographic origin from speech. Please read the instructions carefully before proceeding.<br><br>
-      📌 Instructions:<br>
-      1. Select your actual hometown or place of birth. Please be honest — this is crucial for the accuracy of our research.<br>
-      2. Speak clearly and naturally when recording the given sentence.<br>
-      <h4>(Practice the sentence once before recording)</h4>
-      3. Use a quiet environment and make sure your microphone is working properly.<br>
-      4. Do not speak random words or make irrelevant sounds, as it may affect the quality of the dataset.<br>
-      5. Kindly submit once only. Multiple submissions from the same person will not be accepted.<br><br>
-      🎬 Recording Process:<br>
-      Enter Details ➝ Start Recording ➝ Speak Sentence ➝ Stop Recording ➝ Submit Recording<br>
-      (To redo: Stop Recording ➝ Restart Recording ➝ Stop Recording ➝ Submit Recording)<br><br>
-      <h4>(Your data will be stored securely and used only for academic research purposes.)</h4></p>
-    <button onclick="closePopup()">OK</button>
-  </div>
+    <div class="popup-content">
+      <h2>📋 Important Guidelines </h2>
+      <p>
+        We are collecting voice recordings for research on identifying a speaker’s 
+        geographic origin from speech. Please read the instructions carefully before proceeding.<br><br>
+        📌 <b>Instructions:<br></b>
+        1. Select your actual hometown or place of birth. Please be honest — this is crucial for the accuracy of our research.<br>
+        2. Speak clearly and naturally when recording the given sentence.<br>
+        3. Use a quiet environment and make sure your microphone is working properly.<br>
+        4. Do not speak random words or make irrelevant sounds, as it may affect the quality of the dataset.<br>
+        5. Kindly submit once only. Multiple submissions from the same person will not be accepted.<br>
+        6. You must record one long paragraph and ten random Nepali sentences. The 'Submit' button will be enabled only after you finish recording all of them.<br><br>
+        🎬 Recording steps:<br>
+        Enter Details ➝ Start Recording ➝ Speak Sentence ➝ Stop Recording ➝ Upload Recording<br>
+        (To redo: Stop Recording ➝ Restart Recording ➝ Stop Recording ➝ Upload Recording)<br><br>
+        <h4>(Your data will be stored securely and used only for academic research purposes.)</h4></p>
+      <button onclick="closePopup()">OK</button>
+    </div>
   </div>
 
   <h2>Submit Your Voice Recording</h2>
@@ -55,50 +58,70 @@ Please help us by recording your voice to support this voice dataset. To collect
     a research and development project focused on regional speech patterns.
     Help us build a diverse voice dataset by recording your voice. Please read the sentence below and provide your details.
   </p>
-  
+
   <form id="voiceform">
-  <label for="province">Province:</label>
-  <select id="province">
-    <option value="" disabled selected>-- Select your Province --</option>
-    <option value="Koshi">Koshi Province</option>
-    <option value="Madhesh">Madhesh Province</option>
-    <option value="Bagmati">Bagmati Province</option>
-    <option value="Gandaki">Gandaki Province</option>
-    <option value="Lumbini">Lumbini Province</option>
-    <option value="Karnali">Karnali Province</option>
-    <option value="Sudurpashchim">Sudurpashchim Province</option>
-  </select>
-  
-  <label>District:</label>
-  <select id="district" required>
-    <option value="">-- Select District --</option>
-  </select>
+    <label for="province">Province:</label>
+    <select id="province">
+      <option value="" disabled selected>-- Select your Province --</option>
+      <option value="Koshi">Koshi Province</option>
+      <option value="Madhesh">Madhesh Province</option>
+      <option value="Bagmati">Bagmati Province</option>
+      <option value="Gandaki">Gandaki Province</option>
+      <option value="Lumbini">Lumbini Province</option>
+      <option value="Karnali">Karnali Province</option>
+      <option value="Sudurpashchim">Sudurpashchim Province</option>
+    </select>
+    
+    <label>District:</label>
+    <select id="district" required>
+      <option value="">-- Select District --</option>
+    </select>
 
-  <label for="age">Age:</label>
-  <input type="number" id="age" placeholder="Enter your age">
+    <label for="age">Age:</label>
+    <input type="number" id="age" placeholder="Enter your age">
 
-  <label for="gender" >Gender:</label>
-  <select id="gender">
-    <option value="" disabled selected>-- Select Gender --</option>
-    <option value="Male">Male</option>
-    <option value="Female">Female</option>
-    <option value="Other">Other</option>
-  </select>
+    <label for="gender" >Gender:</label>
+    <select id="gender">
+      <option value="" disabled selected>-- Select Gender --</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
 
-  <label for="sentence" class="sentence">Read the sentence below clearly and at a natural pace for accurate recording:</label>
-  <div class ="counter-box">
-    <p id="counter">Loading...</p> 
-  </div>
-  <div class="sentence-box">
-    <div class="sentence-text">
-     <p id="sentence">Loading...</p>
-  </div>
-  </div>
-  <button id="recordButton" class="record-button" type="button">🎙️ Start Recording</button>
-  <audio id="audioPlayback" controls style="display: none;"></audio>
-  <button id="uploadButton" class="upload-button" type="button" disabled>Upload Recording</button>
-  <button id="submitButton" class="submit-button" disabled>Submit Recording</button>
+    <label>Are you currently at origin place?</label>
+    <div class="choice-container">
+        <label>
+          <input type="radio" name="choice" value="yes"> Yes
+        </label>
+        <label>
+          <input type="radio" name="choice" value="no"> No
+        </label>
+    </div>
+    <label>Pick Your Origin Location:</label>
+    <div id="map"></div>
+    <div class="coords">
+      <label>Latitude: <span id="lat"></span></label> 
+      <label>Longitude: <span id="lng"></span></label>
+    </div>
+    <!-- <button id="saveBtn" type="button">Save Location</button> -->
+    
+    <label for="sentence" class="sentence">Read the sentence below clearly and at a natural pace for accurate recording:<br>
+      (Practice the sentence once before recording)</label>
+    <div class ="counter-box">
+      <p id="counter">Loading...</p> 
+    </div>
+    <div class="sentence-box">
+      <div class="sentence-text">
+        <p id="sentence">Loading...</p>
+      </div>
+    </div>
+    <button id="recordButton" class="record-button" type="button">🎙️ Start Recording</button>
+    <audio id="audioPlayback" controls style="display: none;"></audio>
+    <button id="uploadButton" class="upload-button" type="button" disabled>Upload Recording</button>
+    <button id="submitButton" class="submit-button" disabled>Submit Recording</button>
   </form>
+
+  <!-- Popup for successful submission -->
   <div id="popupSubmit" class="popup-overlay" style="display: none">
     <div class="popup-content2">
       <h2>✅ Submission Successful!!</h2>
@@ -106,7 +129,7 @@ Please help us by recording your voice to support this voice dataset. To collect
         <h4> Your Voice Matters!</h4> </p>
       <button onclick="closePopupS()">OK</button>
     </div>
-    </div>
+  </div>
 </div>
     
 <section class="faq-section">
@@ -132,6 +155,10 @@ Please help us by recording your voice to support this voice dataset. To collect
   <p>&copy; 2025 Nepali Voice Dataset. All rights reserved.</p>
 </footer>  
 
+<!-- Google Maps API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYpiEWnHcJb8VXwvAdWRs9rcG3NS5SI84&callback=initMap" loading="async" defer></script>
+
+<!-- Audio recorder scripts -->
 <script src="https://cdn.jsdelivr.net/npm/audiobuffer-to-wav@1.0.0/index.min.js"></script>
 <script src="recorder.js"></script>
 </body>

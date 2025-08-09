@@ -283,6 +283,8 @@ submitBtn.addEventListener("click", async (e) => {
   formData.append("district", document.getElementById("district").value);
   formData.append("age", document.getElementById("age").value);
   formData.append("gender", document.getElementById("gender").value);
+  formData.append("latitude", document.getElementById("lat").textContent);
+  formData.append("longitude", document.getElementById("lng").textContent);
 
   const response = await fetch("/upload", {
     method: "POST",
@@ -424,3 +426,81 @@ const provinceDistrictMap = {
     "Kanchanpur",
   ],
 };
+
+let map, marker;
+
+function updateCoords(lat, lng) {
+  document.getElementById("lat").textContent = lat.toFixed(6);
+  document.getElementById("lng").textContent = lng.toFixed(6);
+}
+
+function initMap() {
+  let defaultPos = { lat: 28.3949, lng: 84.124 }; // Nepal center
+
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: defaultPos,
+    zoom: 7,
+  });
+
+  marker = new google.maps.Marker({
+    position: defaultPos,
+    map: map,
+    draggable: true,
+  });
+
+  updateCoords(defaultPos.lat, defaultPos.lng);
+
+  // Marker drag event
+  marker.addListener("dragend", function () {
+    let pos = marker.getPosition();
+    updateCoords(pos.lat(), pos.lng());
+  });
+
+  // Map click event (for manual placement)
+  map.addListener("click", function (e) {
+    marker.setPosition(e.latLng);
+    updateCoords(e.latLng.lat(), e.latLng.lng());
+  });
+
+  // Listen to radio buttons
+  document.querySelectorAll('input[name="choice"]').forEach((radio) => {
+    radio.addEventListener("change", function () {
+      if (this.value === "yes") {
+        detectCurrentLocation();
+      } else {
+        // Reset to default location for manual selection
+        map.setCenter(defaultPos);
+        map.setZoom(7);
+        marker.setPosition(defaultPos);
+        updateCoords(defaultPos.lat, defaultPos.lng);
+      }
+    });
+  });
+}
+
+function detectCurrentLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        let userPos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        map.setCenter(userPos);
+        map.setZoom(12);
+        marker.setPosition(userPos);
+        updateCoords(userPos.lat, userPos.lng);
+      },
+      function () {
+        alert(
+          "Unable to retrieve your location. Please allow location access."
+        );
+      }
+    );
+  } else {
+    alert("Geolocation is not supported by your browser.");
+  }
+}
+
+// Expose initMap globally for Google Maps callback
+window.initMap = initMap;
