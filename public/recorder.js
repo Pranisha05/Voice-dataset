@@ -230,6 +230,9 @@ uploadBtn.addEventListener("click", async () => {
     uploadBtn.classList.add("disabled");
     submitBtn.disabled = false; // Enable submit button
     submitBtn.classList.add("enabled");
+
+    document.getElementById("sentence").innerText =
+      "Thankyou for your participation! Please click on Submit Recording to complete the process.";
   }
 
   startBtn.textContent = "🎙️ Start Recording"; // Reset start button text
